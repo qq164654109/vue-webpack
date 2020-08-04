@@ -1,0 +1,6 @@
+.el-checkbox {
+  color: $color-form-txt !important;
+}
+.el-checkbox__input.is-disabled+span.el-checkbox__label {
+  color: $color-disabled !important;
+}

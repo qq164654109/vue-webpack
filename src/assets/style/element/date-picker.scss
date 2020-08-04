@@ -1,0 +1,8 @@
+.el-date-table td span {
+  border-radius: 2px !important;
+}
+
+.el-date-table td.current:not(.disabled) span {
+  color: $color-main !important;
+  background-color: $color-check-bg !important;
+}

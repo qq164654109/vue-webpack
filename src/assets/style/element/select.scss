@@ -1,0 +1,21 @@
+.el-select {
+  line-height: 40px;
+}
+.el-select-dropdown__wrap.el-scrollbar__wrap {
+  overflow: scroll !important;
+}
+.el-select-dropdown__item {
+  &.selected {
+    color: $color-main !important;
+    font-weight: normal !important;
+    background-color: $color-check-bg !important;
+  }
+  &.hover {
+    color: $color-main !important;
+    background-color: transparent;
+  }
+  &:hover {
+    color: $color-main !important;
+    background-color: transparent;
+  }
+}

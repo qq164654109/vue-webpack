@@ -1,0 +1,37 @@
+.el-input__inner {
+  color: $color-title-sub !important;
+  border: 1px solid $color-border-line !important;
+  &:hover {
+    border-color: $color-main !important;
+  }
+  &:focus {
+    border-color: $color-main !important;
+    box-shadow: 0 0 2px $color-main !important;
+  }
+}
+
+.search.el-input .el-input__inner {
+  background-color: $color-bg !important;
+  &:hover {
+    background-color: $color-white !important;
+  }
+  &:focus {
+    border-color: $color-main !important;
+    background-color: $color-white !important;
+  }
+}
+
+.el-textarea__inner {
+  color: $color-title !important;
+  border: 1px solid $color-border-line !important;
+  &:hover {
+    border-color: $color-main !important;
+  }
+  &:focus {
+    border-color: $color-main !important;
+    box-shadow: 0 0 2px $color-main !important;
+  }
+}
+.el-input__suffix-inner {
+  background-color: #fff;
+}

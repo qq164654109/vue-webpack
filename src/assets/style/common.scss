@@ -1,0 +1,148 @@
+// float
+.fl { float: left !important; }
+.fr { float: right !important; }
+.clearfix { &::after { display: block; content: ""; clear: both; }}
+
+// content
+.content-center { display: flex; align-items: center; justify-content: center; };
+
+// Weight and italics
+.font-weight-normal { font-weight: normal !important; }
+.font-weight-bold   { font-weight: bold !important; }
+.font-italic        { font-style: italic !important; }
+
+// size
+.full { width: 100%; height: 100%; }
+.full-width  { width: 100% !important; }
+.full-height { height: 100% !important; }
+.half-width  { width: 50% !important; }
+.half-height { height: 50% !important; }
+.auto-width  { width: auto !important; }
+.auto-height { height: auto !important; }
+
+// Responsive alignment
+.text-left   { text-align: left !important; }
+.text-right  { text-align: right !important; }
+.text-center { text-align: center !important; }
+
+// Weight and italics
+.font-weight-normal { font-weight: normal !important; }
+.font-weight-bold   { font-weight: bold !important; }
+.font-italic        { font-style: italic !important; }
+
+// Cursor
+.cursor-pointer { cursor: pointer !important; }
+.cursor-default { cursor: default !important; }
+
+// overflow
+.of-auto      { overflow: auto !important; }
+.of-hidden    { overflow: hidden !important; }
+.of-scroll    { overflow: scroll !important; }
+.of-visible   { overflow: visible !important; }
+
+.ofx-auto     { overflow-x: auto !important; }
+.ofx-hidden   { overflow-x: hidden !important; }
+.ofx-scroll   { overflow-x: scroll !important; }
+.ofx-visible  { overflow-x: visible !important; }
+
+.ofy-auto     { overflow-y: auto !important; }
+.ofy-hidden   { overflow-y: hidden !important; }
+.ofy-scroll   { overflow-y: scroll !important; }
+.ofy-visible  { overflow-y: visible !important; }
+
+/* Align */
+.align-baseline    { vertical-align: baseline !important; } /* Browser default */
+.align-top         { vertical-align: top !important; }
+.align-middle      { vertical-align: middle !important; }
+.align-bottom      { vertical-align: bottom !important; }
+.align-text-bottom { vertical-align: text-bottom !important; }
+.align-text-top    { vertical-align: text-top !important; }
+
+/* display */
+.d-none         { display: none !important; }
+.d-inline       { display: inline !important; }
+.d-inline-block { display: inline-block !important; }
+.d-block        { display: block !important; }
+.d-table        { display: table !important; }
+.d-table-cell   { display: table-cell !important; }
+.d-flex         { display: flex !important; }
+.d-inline-flex  { display: inline-flex !important; }
+
+/* Position */
+.position-relative { position: relative; }
+.position-absolute{ position: absolute; }
+.pos-top-left {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.pos-top-right {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.pos-left-bottom {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+.pos-right-bottom {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+.position-center {
+  position:absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin:auto;
+}
+
+.border-top,
+.border-right,
+.border-bottom,
+.border-left {
+  border: 1px solid black !important;
+}
+
+.border-top {
+  border-right-width: 0 !important;
+  border-bottom-width: 0 !important;
+  border-left-width: 0 !important;
+}
+.border-right {
+  border-top-width: 0 !important;
+  border-bottom-width: 0 !important;
+  border-left-width: 0 !important;
+}
+.border-bottom {
+  border-top-width: 0 !important;
+  border-right-width: 0 !important;
+  border-left-width: 0 !important;
+}
+.border-left {
+  border-top-width: 0 !important;
+  border-right-width: 0 !important;
+  border-bottom-width: 0 !important;
+}
+
+.border-0        { border: 0 !important; }
+.border-top-0    { border-top: 0 !important; }
+.border-right-0  { border-right: 0 !important; }
+.border-bottom-0 { border-bottom: 0 !important; }
+.border-left-0   { border-left: 0 !important; }
+
+.more {
+  color:  #9B9B9B;
+  font-size:15px;
+  text-decoration: underline;
+  font-style: normal;
+}
+
+.text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

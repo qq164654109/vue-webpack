@@ -1,18 +1,22 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <el-button @click="a">asdasd</el-button>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import { getUserMenu } from '@/api/auth';
 
 export default {
-  name: 'Home',
-  components: {
-    HelloWorld
+  name: 'home',
+  methods: {
+    a() {
+      getUserMenu({
+        baseURL: '/api'
+      }).then(data => {
+        console.log(data)
+      })
+    }
   }
 }
 </script>

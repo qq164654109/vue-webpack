@@ -1,0 +1,31 @@
+.el-table {
+  color: rgba(0, 0, 0, 0.65) !important;
+}
+
+.el-table thead {
+  color: #393940 !important;
+  .cell {
+    font-weight: bold !important;
+  }
+}
+
+.el-table th, .el-table tr {
+  background-color: transparent !important;
+}
+
+.el-table thead tr {
+  background-color: $color-check-bg !important;
+}
+
+.el-table tr.el-table__row {
+  &:nth-child(odd) {
+    background: $color-white !important;
+  }
+  &:nth-child(even) {
+    background: $color-blue-bg !important;
+  }
+}
+
+.el-table .cell {
+  line-height: 20px !important;
+}

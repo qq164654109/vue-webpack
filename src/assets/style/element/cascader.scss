@@ -1,0 +1,9 @@
+.el-cascader-node.in-active-path, .el-cascader-node.is-active, .el-cascader-node.is-selectable.in-checked-path {
+  color: $color-main !important;
+  font-weight: normal !important;
+}
+
+.el-cascader-node:not(.is-disabled):focus, .el-cascader-node:not(.is-disabled):hover {
+  color: $color-main !important;
+  background-color: transparent;
+}

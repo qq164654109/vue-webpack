@@ -1,0 +1,8 @@
+.el-tooltip__popper {
+  border: 0 !important;
+  color: $color-form-txt;
+  box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
+  .popper__arrow {
+    border-color: transparent !important;
+  }
+}

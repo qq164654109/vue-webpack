@@ -1,0 +1,45 @@
+.el-dialog__wrapper {
+  text-align: center;
+}
+.el-dialog {
+  display: inline-block;
+  max-width: 100%;
+  width: auto;
+}
+.el-dialog__header {
+  height: 54px;
+  line-height: 54px;
+  padding: 0 20px;
+  text-align: left;
+  border-bottom: 1px solid $color-border-line;
+}
+
+.el-dialog__title {
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: $color-title;
+  line-height: 54px;
+  .el-dialog__headerbtn {
+    top: 19px;
+    line-height: 1;
+  }
+}
+
+.el-dialog__body {
+  padding: 20px;
+  text-align: left;
+}
+
+.el-dialog__footer {
+  text-align: center;
+  padding: 0 20px 20px 20px;
+}
+
+.el-dialog.previewer {
+  max-width: 50%;
+  .el-dialog__body {
+    padding: 0;
+    font-size: 0;
+    text-align: center;
+  }
+}

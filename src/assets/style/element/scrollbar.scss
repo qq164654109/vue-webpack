@@ -1,0 +1,16 @@
+.el-scrollbar {
+  height: 100% !important;
+}
+.el-scrollbar__wrap{
+  overflow-x: hidden !important;
+}
+.el-scrollbar__bar.is-vertical {
+  width: 3px;
+  top: 2px;
+}
+.el-scrollbar__thumb, .el-scrollbar__thumb:hover {
+  background-color: rgba(20, 118, 247, 0.3);
+}
+.el-scrollbar__bar.is-horizontal {
+  height: 0;
+}

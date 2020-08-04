@@ -1,0 +1,12 @@
+.el-tree-node__content {
+  height: 38px !important;
+  &:hover {
+    color: $color-main !important;
+    background-color: transparent !important;
+  }
+}
+
+.el-tree-node:focus>.el-tree-node__content {
+  color: $color-main !important;
+  background-color: $color-check-bg !important;
+}
