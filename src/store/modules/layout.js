@@ -1,7 +1,7 @@
-export const state = () => ({
+export const state = {
   defaultName: 'default',
   componentNames: []
-});
+};
 
 export const mutations = {
   setDefaultName(state, payload) {

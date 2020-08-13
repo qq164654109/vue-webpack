@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import persisted from './plugins/persisted';
 
 Vue.use(Vuex);
 
@@ -15,10 +16,11 @@ const modules = requireContext.keys().reduce((prev, fileName) => {
 }, {});
 
 export default new Vuex.Store({
+  plugins: [persisted(['user.userMenu'])],
   modules,
-  state: () => ({
+  state: {
     requestSource: null
-  }),
+  },
   mutations: {
     SET_REQUEST_SOURCE (state, payload) {
       state.requestSource = payload;

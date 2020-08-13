@@ -69,8 +69,8 @@
 .d-inline-flex  { display: inline-flex !important; }
 
 /* Position */
-.position-relative { position: relative; }
-.position-absolute{ position: absolute; }
+.pos-relative { position: relative; }
+.pos-absolute{ position: absolute; }
 .pos-top-left {
   position: absolute;
   top: 0;
@@ -90,14 +90,6 @@
   position: absolute;
   right: 0;
   bottom: 0;
-}
-.position-center {
-  position:absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  margin:auto;
 }
 
 .border-top,
@@ -145,4 +137,30 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}.no-select {
+  user-select: none;
+}
+.txt-left { 
+  text-align: left;
+}
+.txt-right  { 
+  text-align: right; 
+}
+.txt-center { 
+  text-align: center; 
+}
+.txt-of-ell {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.txt-white {
+  color: #fff;
+}
+
+.href {
+  color: #3886FF;
+  text-decoration: underline;
+  font-style: normal;
+  cursor: pointer;
 }

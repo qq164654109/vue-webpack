@@ -1,5 +1,11 @@
 import { createRequest, createStorageRequest } from '@/utils/axios-helper';
 
-export const getUserMenu = createStorageRequest('/server/user/menu', {
+export const login = createRequest('/server/auth/login', {
+  method: 'post',
+  baseURL: process.env.BASE_URL,
+  headers: {'Content-Type':'application/x-www-form-urlencoded'}
+});
+
+export const getUserMenu = createRequest('/server/auth/menu', {
   baseURL: process.env.BASE_URL
 });

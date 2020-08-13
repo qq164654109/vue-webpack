@@ -1,0 +1,18 @@
+.rolltoleft-enter-active {
+  animation: rolltoleft .4s ease-out;
+}
+
+.rolltoleft-leave-active {
+  animation: rolltoleft .4s ease-out reverse;
+}
+
+@keyframes rolltoleft {
+  0% {
+    opacity: 0;
+    transform: translateX(40px) rotate(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0px) rotate(-360deg);
+  }
+}

@@ -15,10 +15,6 @@ const default_storage_opts = {
   storageOutTime: 60000
 };
 
-const validateStatus = status => {
-  return status >= 200 && status < 300;
-};
-
 // 封装请求
 export function request(options = {}) {
   let opts = Object.assign({}, default_opts, options);
@@ -42,11 +38,6 @@ export function request(options = {}) {
   if (opts.paramStr) {
     opts.url = opts.url + '?' + opts.paramStr;
     delete opts.paramStr;
-  }
-
-  // 自动验证错误码
-  if (opts.autoErrorRes) {
-    opts.validateStatus = validateStatus;
   }
 
   return instance(opts).then(res => {

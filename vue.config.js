@@ -1,45 +1,16 @@
 const path = require('path');
 const server = require('./server'); 
-
-const externals = {
-  'vue': 'Vue',
-  'vue-router': 'VueRouter',
-  'vuex': 'Vuex',
-  'axios': 'axios',
-  'echarts': 'echarts',
-  'element-ui': 'ELEMENT'
-}
-
-const cdn = {
-  dev: {
-    css: [],
-    js: [
-      '//at.alicdn.com/t/font_1221716_kybzmkglgdd.js'
-    ]
-  },
-  build: {
-    css: [],
-    js: [
-      'https://cdn.bootcss.com/vue/2.5.2/vue.min.js',
-      'https://cdn.bootcss.com/vue-router/3.0.1/vue-router.min.js',
-      'https://cdn.bootcss.com/vuex/3.0.1/vuex.min.js',
-      'https://cdn.bootcss.com/axios/0.18.0/axios.min.js',
-      'https://cdn.bootcss.com/echarts/4.2.1/echarts.min.js',
-      'https://cdn.bootcss.com/element-ui/2.12.0/index.js',
-      '//at.alicdn.com/t/font_1221716_kybzmkglgdd.js'
-    ]
-  }
-}
-
-const aliasMap = {};
+const webpack = require('webpack');
+const externals = require('./config/externals');
+const cdn = require('./config/cdn');
+const aliasMap = require('./config/aliasMap');
+const variable = require('./config/variable');
 
 function resolve(dir) {
   return path.join(__dirname, dir);
 }
 
 module.exports = {
-  publicPath: './',
-  assetsDir: './',
   productionSourceMap: false,
   devServer: {
     port: 3000,
@@ -60,7 +31,9 @@ module.exports = {
   css: {
     loaderOptions: {
       scss: {
-        prependData:  `@import "@/assets/style/theme.scss";@import "@/assets/style/layout.scss";`
+        prependData:  `@import "@/assets/style/theme.scss";
+        @import "@/assets/style/layout.scss";
+        $oss: "${process.env.VUE_APP_OSS_URL}";`
       }
     }
   },
@@ -70,6 +43,10 @@ module.exports = {
       // 生产环境 npm 包转 CDN
       myConfig.externals = externals;
     }
+    myConfig.plugins = [
+      // 配置全局环境变量
+      new webpack.DefinePlugin(variable)
+    ];
     return myConfig;
   },
   chainWebpack: config => {
@@ -84,8 +61,7 @@ module.exports = {
       .tap(args => {
         if (process.env.NODE_ENV === 'production') {
           args[0].cdn = cdn.build
-        }
-        if (process.env.NODE_ENV === 'development') {
+        } else if (process.env.NODE_ENV === 'development') {
           args[0].cdn = cdn.dev
         }
         return args

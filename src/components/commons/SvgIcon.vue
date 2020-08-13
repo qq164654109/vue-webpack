@@ -16,11 +16,11 @@ export default {
       return 'svg-icon svg-icon-' + this.name;
     }
   },
-  render(h, { props }) {
+  render(h, { props, data }) {
     const className = 'svg-icon svg-icon-' + props.name;
     const iconPath = '#' + props.name;
     return (
-      <svg class={className} aria-hidden="true">
+      <svg {...data} class={className} aria-hidden="true">
         <use xlinkHref={iconPath}></use>
       </svg>
     );
@@ -31,8 +31,8 @@ export default {
 <style>
   .svg-icon {
     fill: currentColor;
-    height: 24px;
-    width: 24px;
+    height: 18px;
+    width: 18px;
     vertical-align: middle;
   }
 </style>

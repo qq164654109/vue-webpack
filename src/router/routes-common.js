@@ -1,22 +1,11 @@
 import Login from '@/views/login/Login';
-import Home from '@/views/Home';
-import Page401 from '@/views/page-error/Page401';
-import Page404 from '@/views/page-error/Page404';
-import Page500 from '@/views/page-error/Page500';
-import PageEmpty from '@/views/page-error/PageEmpty';
-import PageError from '@/views/page-error/PageError';
-import { getToken } from '@/utils/auth';
-import website from '@/config/website';
+import Page401 from '@/views/page-template/Page401';
+import Page404 from '@/views/page-template/Page404';
+import Page500 from '@/views/page-template/Page500';
+import PageEmpty from '@/views/page-template/PageEmpty';
+import PageError from '@/views/page-template/PageError';
 
 const commonRoutes = [
-  {
-    path: '/',
-    name: 'App',
-    component: Home
-    // redirect: () => {
-    //   return !getToken() ? '/login': website.auth_path
-    // }
-  },
   {
     path: '/login',
     name: 'Login',

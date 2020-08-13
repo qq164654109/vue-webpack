@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="width-limit">
     <router-view/>
   </div>
 </template>

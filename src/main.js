@@ -12,6 +12,7 @@ import './plugins/vue-directives';
 import './plugins/vue-filters';
 import './plugins/vue-inject';
 import './plugins/vue-scroll';
+import './plugins/vue-virtual-scroller';
 
 // 浏览器 css 兼容文件
 import 'normalize.css';

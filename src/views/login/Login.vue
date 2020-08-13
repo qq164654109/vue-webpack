@@ -9,13 +9,13 @@
         </el-form-item>
         <el-form-item prop="password" :class="{'focus': passwordFocus}">
           <div class="placeholder no-select pos-absolute">密码</div>
-          <el-input id="password" v-model="form.password" @focus="onFocus('password')" @blur="onBlur('password')"></el-input>
+          <el-input id="password" type="password" v-model="form.password" @focus="onFocus('password')" @blur="onBlur('password')"></el-input>
         </el-form-item>
         <el-button class="btn full" @click="onSubmit">登录</el-button>
       </el-form>
       <div class="login-tip txt-center">
         没有账号？
-        <em>注册</em>
+        <span class="href">注册</span>
       </div>
     </div>
     <div class="bg"></div>
@@ -24,7 +24,9 @@
 </template>
 
 <script>
-  import { mapMutations } from 'vuex';
+  import { mapActions } from 'vuex';
+  import qs from 'qs';
+  import { getToken } from '@/utils/auth';
 
   export default {
     layout: 'blank',
@@ -47,7 +49,9 @@
       }
     },
     methods: {
-      ...mapMutations('user', ['setUser']),
+      ...mapActions({
+        Login: 'user/Login'
+      }),
       routeJump() {
         const redirect = this.$route.query.redirect;
         const jumpPath = redirect ? redirect : '/';
@@ -56,14 +60,14 @@
       onSubmit() {
         this.$refs.form.validate((valid) => {
           if (valid) {
-            this.setUser({
-              name: this.form.username,
-              token: this.form.password
-            });
-            this.routeJump();
-          } else {
-            console.log('error submit!!');
-            return false;
+            this.Login({
+              data: qs.stringify(this.form),
+              errorMsg(err) {
+                return err.response.data.msg;
+              }
+            }).then(() => {
+              this.routeJump();
+            })
           }
         });
       },
@@ -73,6 +77,13 @@
       onBlur(inputName) {
         this[inputName + 'Focus'] = !!this.form[inputName];
       }
+    },
+    beforeRouteEnter(to, from, next) {
+      if (!!getToken()) {
+        next('/');
+      } else {
+        next();
+      }
     }
   }
 </script>
@@ -81,6 +92,7 @@
 #login {
   position: relative;
   height: 100vh;
+  box-sizing: border-box;
   &.active {
     .bg {
       left: 0;
@@ -92,7 +104,7 @@
   }
   .login-form-wrap {
     position: relative;
-    width: 380px;
+    width: 300px;
     padding: 0 40px;
     margin: 18vh auto 0;
     background-color: #fff;
@@ -117,7 +129,7 @@
             color: $color-main;
             transform: translateY(-30px);
           }
-          /deep/.el-form-item__error {
+          ::v-deep.el-form-item__error {
             display: none;
           }
         }
@@ -132,7 +144,7 @@
           transition: all .4s $transEffect;
           z-index: 2;
         }
-        &.is-error /deep/.el-input__inner {
+        &.is-error ::v-deep.el-input__inner {
           border-color: #DCDFE6;
         }
         .placeholder {
@@ -148,7 +160,7 @@
           outline: none;
           font-size: 16px;
         }
-        /deep/ {
+        ::v-deep {
           .el-input__inner {
             border-radius: 0;
             border-left: none;

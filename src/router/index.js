@@ -1,10 +1,10 @@
 import Vue from 'vue';
-import VueRouter from 'vue-router';
 import commonRoutes from './routes-common';
+import AuthVueRouter from './router';
 
-Vue.use(VueRouter);
+Vue.use(AuthVueRouter);
 
-const router = new VueRouter({
+const options = {
   mode: 'history',
   base: process.env.BASE_URL,
   routes: commonRoutes,
@@ -23,6 +23,8 @@ const router = new VueRouter({
       }
     }
   }
-});
+}
+
+const router = new AuthVueRouter(options);
 
 export default router;
