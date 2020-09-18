@@ -1,13 +1,13 @@
 import store from '@/store';
-import { API_URL } from '@/config/env';
+import { API_URL, PROXY_URL } from '@/config/env';
 import ELEMENT from 'element-ui';
 import instance from './axios';
+import { replaceStrTemplate } from './index';
 
 const default_opts = {
-  baseURL: API_URL,
+  baseURL: PROXY_URL ? PROXY_URL : API_URL,
   autoCancel: true,
   autoGetData: true,
-  cancelToken: true,
   autoErrorRes: true
 };
 const default_storage_opts = {
@@ -17,61 +17,68 @@ const default_storage_opts = {
 
 // 封装请求
 export function request(options = {}) {
-  let opts = Object.assign({}, default_opts, options);
-
+  const { 
+    autoCancel, 
+    autoGetData,
+    template,
+    paramStr, 
+    successMsg, 
+    errorMsg, 
+    ...opts
+  } = Object.assign({}, default_opts, options);
+  
   // 自动取消请求
-  if (opts.autoCancel) {
+  if (autoCancel && store.state.requestSource) {
     opts.cancelToken = store.state.requestSource.token;
   }
 
   // url字符串模板替换
-  if (/{|}/.test(opts.url)) {
-    opts.url = opts.url.replace(/\{.*?\}/g, tempStr => {
-      const paramKey = tempStr.replace(/{|}/g, '');
-      const paramVal = opts.params[paramKey];
-      delete opts.params[paramKey];
-      return paramVal;
-    });
-  }
+  opts.url = replaceStrTemplate(opts.url, template || {});
   
   // params拼接
-  if (opts.paramStr) {
-    opts.url = opts.url + '?' + opts.paramStr;
-    delete opts.paramStr;
+  if (paramStr) {
+    opts.url = opts.url + '?' + paramStr;
   }
 
   return instance(opts).then(res => {
+    // 处理取消请求
+    if (res === undefined) {
+      return Promise.reject('cancel request')
+    };
     // successMsg 参数触发成功提示框
-    if (typeof opts.successMsg === 'string') {
-      ELEMENT.Message.success(opts.successMsg);
-    } else if (typeof opts.successMsg === 'function') {
-      ELEMENT.Message.success(opts.successMsg(res));
+    if (typeof successMsg === 'string') {
+      ELEMENT.Message.success(successMsg);
+    } else if (typeof successMsg === 'function') {
+      ELEMENT.Message.success(successMsg(res));
     }
     // 自动取出并传递 res.data 数据
-    return opts.autoGetData ? res.data : res;
+    return autoGetData ? res.data : res;
   }).catch(error => {
     // errorMsg 参数触发成功提示框
-    if (typeof opts.errorMsg === 'string') {
-      ELEMENT.Message.error(opts.errorMsg);
-    } else if (typeof opts.errorMsg === 'function') {
-      ELEMENT.Message.error(opts.errorMsg(error));
+    if (typeof errorMsg === 'string') {
+      ELEMENT.Message.error(errorMsg);
+    } else if (typeof errorMsg === 'function') {
+      ELEMENT.Message.error(errorMsg(error));
     }
-    return Promise.reject(error);
+    return error;
   });
 };
 
 export function storageRequest (options = {}) {
-  let opts = Object.assign({}, default_storage_opts, options);
-  let storageType = opts.storageType;
-  let storageKey = JSON.stringify(options);
+  const {
+    storageType,
+    storageOutTime,
+    ...opts
+  } = Object.assign({}, default_storage_opts, options);
+  let storageKey = JSON.stringify(opts);
   let storageVal = JSON.parse(window[storageType].getItem(storageKey));
-  if (storageVal && new Date().getTime() - storageVal.lastTime <= opts.storageOutTime) {
+  if (storageVal && new Date().getTime() > storageVal.expire) {
     return Promise.resolve(storageVal);
-  } else {
-    return request(options).then(data => {
+  } else { 
+    return request(opts).then(data => {
       window[storageType].setItem(storageKey, JSON.stringify({
-        lastTime: new Date().getTime(),
-        data
+        data,
+        expire: new Date().getTime() + storageOutTime,
       }));
       return data;
     });

@@ -13,6 +13,12 @@
   </div>
 </template>
 
+<script>
+  export default {
+    layout: 'blank'
+  }
+</script>
+
 <style lang="scss" scoped>
 .page-error {
   background: #f0f2f5;
@@ -28,7 +34,7 @@
     background-repeat: no-repeat;
     background-position: 50% 50%;
     background-size: contain;
-    background-image: url($oss + '/images/401.svg');
+    background-image: url($_OSS + '/images/401.svg');
   }
   .content {
     h1 {

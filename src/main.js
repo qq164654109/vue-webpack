@@ -5,7 +5,6 @@ import store from './store';
 import './router/guard';
 
 // 插件
-import './plugins/window-inject';
 import './plugins/element-ui';
 import './plugins/vue-components';
 import './plugins/vue-directives';
@@ -16,7 +15,7 @@ import './plugins/vue-virtual-scroller';
 
 // 浏览器 css 兼容文件
 import 'normalize.css';
-// 项目 css 统一文件
+// 项目 css 文件
 import '@/assets/style/index.scss';
 
 Vue.config.productionTip = false

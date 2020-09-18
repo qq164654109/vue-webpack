@@ -39,21 +39,22 @@
 
 <script>
   import _shuffle from 'lodash/shuffle';
-
+  import img_card from '@/assets/img/card.jpg';
+  
   export default {
     data() {
       return {
         searchVal: '',
         isBallShow: false,
         cardList: [
-          {id: 1, count: 0, img: '/card-list/1.jpg', name: '测试1', isBallShow: false},
-          {id: 2, count: 0, img: '/card-list/1.jpg', name: '测试2', isBallShow: false},
-          {id: 3, count: 0, img: '/card-list/1.jpg', name: '测试3', isBallShow: false},
-          {id: 4, count: 0, img: '/card-list/1.jpg', name: '测试4', isBallShow: false},
-          {id: 5, count: 0, img: '/card-list/1.jpg', name: '测试5', isBallShow: false},
-          {id: 6, count: 0, img: '/card-list/1.jpg', name: '测试6', isBallShow: false},
-          {id: 7, count: 0, img: '/card-list/1.jpg', name: '测试7', isBallShow: false},
-          {id: 8, count: 0, img: '/card-list/1.jpg', name: '测试8', isBallShow: false},
+          {id: 1, count: 0, img: img_card, name: '测试1', isBallShow: false},
+          {id: 2, count: 0, img: img_card, name: '测试2', isBallShow: false},
+          {id: 3, count: 0, img: img_card, name: '测试3', isBallShow: false},
+          {id: 4, count: 0, img: img_card, name: '测试4', isBallShow: false},
+          {id: 5, count: 0, img: img_card, name: '测试5', isBallShow: false},
+          {id: 6, count: 0, img: img_card, name: '测试6', isBallShow: false},
+          {id: 7, count: 0, img: img_card, name: '测试7', isBallShow: false},
+          {id: 8, count: 0, img: img_card, name: '测试8', isBallShow: false},
         ],
         nextId: 9,
         shopCount: 0
@@ -80,7 +81,7 @@
       },
       addCard() {
         let spliceIndex = Math.floor(Math.random() * (this.cardList.length - 1));  
-        this.cardList.splice(spliceIndex, 0, {id: this.nextId ++, count: 0, img: '/card-list/1.jpg', name: `测试${this.nextId}`, isBallShow: false});
+        this.cardList.splice(spliceIndex, 0, {id: this.nextId ++, count: 0, img: img_card, name: `测试${this.nextId}`, isBallShow: false});
       },
       delCard(item) {
         let index = this.cardList.findIndex(_item => _item.id === item.id);
@@ -119,24 +120,21 @@
 
 <style lang="scss" scoped>
 .test-transition {
-  padding-bottom: 20px;
+  padding: 10px 0;
   .title {
-    height: 64px;
-    line-height: 64px;
     padding-right: 10px;
+    margin-bottom: 20px;
     color: $color-warn;
     .svg-icon {
       width: 24px;
       height: 24px;
+      user-select: none;
       cursor: pointer;
     }
   }
   .search-input {
     width: 280px;
     margin-left: 15px;
-  }
-  .shopcar {
-    margin-top: 20px;
   }
   .card-list {
     list-style: none;

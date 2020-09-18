@@ -34,7 +34,7 @@ instance.interceptors.response.use(
   error => {
     NProgress.done();
     if (!error.response) {
-      if (error.message.includes('timeout')) {
+      if (error.message && error.message.includes('timeout')) {
         // 网络超时
       } else {
         // 断网状态

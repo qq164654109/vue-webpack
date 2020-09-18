@@ -1,0 +1,13 @@
+.fadetoleft-enter {
+  transform: translate(40px);
+  opacity: 0;
+}
+.fadetoleft-enter-active, .fadetoleft-leave-active {
+  transition: all .3s;
+}
+.fadetoleft-leave-active {
+  transform: translate(-40px);
+}
+.fadetoleft-leave-to {
+  opacity: 0;
+}

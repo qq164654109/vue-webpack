@@ -1,25 +1,38 @@
 <template>
-  <div id="login" class="full of-hidden" :class="{'active': form.username || form.password}">
-    <div class="login-form-wrap of-hidden cursor-pointer">
-      <div class="login-tit txt-center">登录</div>
-      <el-form class="login-form" ref="form" :model="form" :rules="rules">
-        <el-form-item prop="username" :class="{'focus': usernameFocus}">
-          <div class="placeholder no-select pos-absolute">用户名</div>
-          <el-input id="username" v-model="form.username" @focus="onFocus('username')" @blur="onBlur('username')"></el-input>
-        </el-form-item>
-        <el-form-item prop="password" :class="{'focus': passwordFocus}">
-          <div class="placeholder no-select pos-absolute">密码</div>
-          <el-input id="password" type="password" v-model="form.password" @focus="onFocus('password')" @blur="onBlur('password')"></el-input>
-        </el-form-item>
-        <el-button class="btn full" @click="onSubmit">登录</el-button>
-      </el-form>
-      <div class="login-tip txt-center">
-        没有账号？
-        <span class="href">注册</span>
+  <div id="login">
+    <div class="content animated flipInX">
+      <div class="form-wrap">
+        <div class="form-title text-20">
+          账号登录
+        </div>
+        <div class="login-group">
+          <el-form ref="form" :model="form" :rules="rules" status-icon :show-message="false">
+            <el-form-item prop="username">
+              <el-input v-model="form.username" placeholder="用户名">
+                <svg-icon slot="prefix" name="icon-dengluye-zhanghao1"></svg-icon>
+              </el-input>
+            </el-form-item>
+            <el-form-item prop="password">
+              <el-input v-model="form.password" type="password" placeholder="密码" @keyup.enter.native="RequestLogin">
+                <svg-icon slot="prefix" name="icon-mima"></svg-icon>
+              </el-input>
+            </el-form-item>
+            <el-form-item prop="code">
+              <el-input v-model="form.code" class="code-input" placeholder="验证码" @keyup.enter.native="RequestLogin">
+                <svg-icon slot="prefix" name="icon-anquan"></svg-icon>
+              </el-input>
+              <code-render class="code" ref="codeRender" v-model="code" :width="140" :height="40"></code-render>
+            </el-form-item>
+            <el-form-item prop="remember">
+              <el-checkbox v-model="form.remember" :true-label="1" :false-label="0">记住密码</el-checkbox>
+            </el-form-item>
+            <el-form-item>
+              <el-button :disabled="isLogining" type="primary" class="login-btn full-width text-18 text-center" @click="RequestLogin">登录</el-button>
+            </el-form-item>
+          </el-form>
+        </div>
       </div>
     </div>
-    <div class="bg"></div>
-    <div class="bubble"></div>
   </div>
 </template>
 
@@ -27,16 +40,30 @@
   import { mapActions } from 'vuex';
   import qs from 'qs';
   import { getToken } from '@/utils/auth';
-
+  import CodeRender from '@/components/code-render/CodeRender';
+  
   export default {
     layout: 'blank',
+    components: {
+      CodeRender
+    },
     data() {
+      const validateCode = (rule, value, callback) => {
+        if (value.toLowerCase() !== this.code.toLowerCase()) {
+          callback(new Error("验证码错误"));
+        } else {
+          callback();
+        }
+      }
       return {
+        isLogining: false,
         usernameFocus: false,
         passwordFocus: false,
         form: {
           username: '',
-          password: ''
+          password: '',
+          code: '',
+          remember: 0,
         },
         rules: {
           username: [
@@ -44,195 +71,54 @@
           ],
           password: [
             { required: true, message: '请输入密码', trigger: ['blur', 'change'] },
+          ],
+          code: [
+            { required: true, validator: validateCode, trigger: ['blur', 'change'] }
           ]
-        }
+        },
+        code: ''
       }
     },
     methods: {
       ...mapActions({
-        Login: 'user/Login'
+        Login: 'user/Login',
+        ConfigUserMenu: 'user/ConfigUserMenu'
       }),
-      routeJump() {
-        const redirect = this.$route.query.redirect;
-        const jumpPath = redirect ? redirect : '/';
-        this.$router.push(jumpPath);
-      },
-      onSubmit() {
+      RequestLogin() {
+        if (this.isLogining) return;
         this.$refs.form.validate((valid) => {
           if (valid) {
+            this.isLogining = true;
             this.Login({
               data: qs.stringify(this.form),
-              errorMsg(err) {
-                return err.response.data.msg;
-              }
+              errorMsg: err => err.response.data.msg
             }).then(() => {
-              this.routeJump();
+              // 注册异步路由
+              this.ConfigUserMenu().then(() => {
+                this.routeJump();
+              }).catch(() => {
+                next({name: 'PageError'});
+              })
+            }).catch(() => {
+              this.refreshCode();
+            }).finally(() => {
+              this.isLogining = false;
             })
           }
         });
       },
-      onFocus(inputName) {
-        this[inputName + 'Focus'] = true;
+      refreshCode() {
+        this.$refs.codeRender.draw();
       },
-      onBlur(inputName) {
-        this[inputName + 'Focus'] = !!this.form[inputName];
-      }
-    },
-    beforeRouteEnter(to, from, next) {
-      if (!!getToken()) {
-        next('/');
-      } else {
-        next();
+      routeJump() {
+        const redirect = this.$route.query.redirect;
+        const jumpPath = redirect ? redirect : '/';
+        this.$router.push(jumpPath);
       }
     }
   }
 </script>
 
 <style lang="scss" scoped>
-#login {
-  position: relative;
-  height: 100vh;
-  box-sizing: border-box;
-  &.active {
-    .bg {
-      left: 0;
-      top: 0;
-    }
-    .bubble {
-      transform: translateY(-52%) translateX(10%);
-    }
-  }
-  .login-form-wrap {
-    position: relative;
-    width: 300px;
-    padding: 0 40px;
-    margin: 18vh auto 0;
-    background-color: #fff;
-    border-radius: 6px;
-    box-shadow: 4px 4px 14px rgba(0, 0, 0, 0.1);
-    z-index: 1;
-    .login-tit {
-      letter-spacing: 1px;
-      font-size: 24px;
-      margin-top: 65px;
-      margin-bottom: 50px;
-    }
-    .login-form {
-      .el-form-item {
-        position: relative;
-        margin-bottom: 40px;
-        &.focus {
-          &:after {
-            width: 100%;
-          }
-          .placeholder {
-            color: $color-main;
-            transform: translateY(-30px);
-          }
-          ::v-deep.el-form-item__error {
-            display: none;
-          }
-        }
-        &:after {
-          content: '';
-          position: absolute;
-          left: 0;
-          bottom: 0;
-          width: 0;
-          height: 2px;
-          background-image: linear-gradient(160deg, $color-main 20%, rgb(139, 108, 250) 80%);
-          transition: all .4s $transEffect;
-          z-index: 2;
-        }
-        &.is-error ::v-deep.el-input__inner {
-          border-color: #DCDFE6;
-        }
-        .placeholder {
-          left: 12px;
-          top: 8px;
-          line-height: 1.5;
-          font-size: 16px;
-          color: #6C757D;
-          transition: all .4s $transEffect;
-          z-index: 3;
-        }
-        .el-input {
-          outline: none;
-          font-size: 16px;
-        }
-        ::v-deep {
-          .el-input__inner {
-            border-radius: 0;
-            border-left: none;
-            border-top: none;
-            border-right: none;
-            border-width: 2px;
-            box-shadow: none;
-            &:focus {
-              border-color: #DCDFE6;
-            }
-          }
-          .el-form-item__error {
-            top: 8px;
-            right: 0;
-            left: auto;
-            padding: 7px 6px;
-            background-color: #F56C6C;
-            color: #fff;
-            border-radius: 4px;
-            box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
-            &::before {
-              content: '';
-              position: absolute;
-              width: 0;
-              height: 0;
-              left: -12px;
-              top: 7px;
-              border-top: 6px solid transparent;
-              border-right: 6px solid #F56C6C;
-              border-bottom: 6px solid transparent;
-              border-left: 6px solid transparent;
-            }
-          }
-        }
-      }
-      .btn {
-        color: #fff;
-        font-size: 16px;
-        margin-bottom: 50px;
-        background-image: linear-gradient(160deg, $color-main 0%, rgb(139, 108, 250) 100%);
-        &:focus, &:hover, &:active {
-          border-color: none;
-          outline: none;
-        }
-      }
-    }
-    .login-tip {
-      font-size: 12px;
-      margin-bottom: 100px;
-    }
-  }
-  .bg {
-    position: absolute;
-    width: 130%;
-    height: 130%;
-    left: -30%;
-    top: -30%;
-    z-index: -1;
-    background-image: linear-gradient(160deg, $color-main 20%,rgb(139, 108, 250) 80%);
-    transition: all 1s;
-  }
-  .bubble {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 70%;
-    height: 0;
-    transform: translateX(25%) translateY(-63%);
-    padding-top: 70%;
-    border-radius: 50%;
-    box-shadow: -4px 4px 12px rgba(255, 255, 255, 0.2);
-    transition: 1s $transEffect;
-  }
-}
+@import './login.scss';
 </style>

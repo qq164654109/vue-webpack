@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 function getFile(name) {
-  return path.join(__dirname, `../public/files/${name}`);
+  return path.join(__dirname, `../mock/${name}`);
 }
 
 const userList = getFile('user.json');

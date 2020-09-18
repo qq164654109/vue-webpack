@@ -1,37 +1,34 @@
 // color
+$COLOR: red;
 $color-main: #4159F7;
 .color-main { color: $color-main !important; }
 .fill-main { color: $color-main !important; }
 
-$color-success: #4BE443;
+$color-success: #15DFA2;
 .color-success { color: $color-success !important; }
 .fill-success { color: $color-success !important; }
 
-$color-warn: #E6A23C;
+$color-warn: #FFBF43;
 .color-warn { color: $color-warn !important; }
 .fill-warn { color: $color-warn !important; }
 
-$color-fail: #F56C6C;
+$color-fail: #FF164E;
 .color-fail { color: $color-fail !important; }
 .fill-fail { color: $color-fail !important; }
 
-$color-red: #FF3E3E;
+$color-blue: #005AFF;
+.color-red { color: $color-blue !important; }
+.fill-red { color: $color-blue !important; }
+
+$color-red: #F56C6C;
 .color-red { color: $color-red !important; }
 .fill-red { color: $color-red !important; }
 
-$color-yellow: #EDD815;
-.color-yellow { color: $color-yellow !important; }
-.fill-yellow { color: $color-yellow !important; }
-
-$color-green: #B7FF43;
-.color-green { color: $color-green !important; }
-.fill-green { color: $color-green !important; }
-
-$color-cyan: #43FFD5;
+$color-cyan: #00BAF4;
 .color-cyan { color: $color-cyan !important; }
 .fill-cyan { color: $color-cyan !important; }
 
-$color-purple: #6236FF;
+$color-purple: #9123FF;
 .color-purple { color: $color-purple !important; }
 .fill-purple { color: $color-purple !important; }
 
@@ -71,13 +68,19 @@ $color-bg: #F5F5F5;
 $color-white-bg: #FFFFFF;
 .bg-white { background-color: $color-white-bg !important; }
 
-$color-red-bg: #FDEFEF;
-.bg-red { background-color: $color-red-bg !important; }
+$color-main-bg: #D3CCFD;
+.bg-main { background-color: $color-main-bg !important; }
 
-$color-yellow-bg: #FFF8EB;
-.bg-yellow { background-color: $color-yellow-bg !important; }
+$color-success-bg: #D2F7EC;
+.bg-success { background-color: $color-success-bg !important; }
 
-$color-cyan-bg: #E9F8F3;
+$color-fail-bg: #FFD0DC;
+.bg-fail { background-color: $color-fail-bg !important; }
+
+$color-warn-bg: #FFF2D9;
+.bg-warn { background-color: $color-warn-bg !important; }
+
+$color-cyan-bg: #CCF1FD;
 .bg-cyan { background-color: $color-cyan-bg !important; }
 
 $color-blue-bg: #F4F9FF;

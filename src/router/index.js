@@ -1,11 +1,12 @@
 import Vue from 'vue';
+import website from '../config/website'
 import commonRoutes from './routes-common';
 import AuthVueRouter from './router';
 
 Vue.use(AuthVueRouter);
 
 const options = {
-  mode: 'history',
+  mode: website.router_mode,
   base: process.env.BASE_URL,
   routes: commonRoutes,
   scrollBehavior (to, from, savedPosition) {

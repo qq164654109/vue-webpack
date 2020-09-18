@@ -3,21 +3,24 @@
 // layout css
 @import './layout.scss';
 // element 样式复写
-// @import './element/button.scss';
-// @import './element/cascader.scss';
-// @import './element/checkbox.scss';
-// @import './element/date-picker.scss';
-// @import './element/form.scss';
-// @import './element/input.scss';
-// @import './element/radio.scss';
-// @import './element/select.scss';
-// @import './element/table.scss';
-// @import './element/tree.scss';
-// @import './element/tabs.scss';
-// @import './element/loading.scss';
-// @import './element/scrollbar.scss';
-// @import './element/dialog.scss';
-// @import './element/tooltip.scss';
+@import './element/button.scss';
+@import './element/cascader.scss';
+@import './element/checkbox.scss';
+@import './element/date-picker.scss';
+@import './element/form.scss';
+@import './element/input.scss';
+@import './element/radio.scss';
+@import './element/select.scss';
+@import './element/table.scss';
+@import './element/tree.scss';
+@import './element/tabs.scss';
+@import './element/loading.scss';
+@import './element/scrollbar.scss';
+@import './element/dialog.scss';
+@import './element/tooltip.scss';
+@import './element/dropdown.scss';
+@import './element/card.scss';
 // transition css
 @import './transition/scale.scss';
 @import './transition/rolltoleft.scss';
+@import './transition/fadetoleft.scss';

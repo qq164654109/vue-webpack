@@ -66,14 +66,54 @@ export function throttle(func, delay) {
 };
 
 // 字符串模板替换
-export function replaceStrTemplate(str, params) {
+export function replaceStrTemplate(str, temp) {
   let result = str;
   if (/{|}/.test(str)) {
-    result = str.replace(/\{.*?\}/g, tempStr => {
-      const paramKey = tempStr.replace(/{|}/g, '');
-      const paramVal = params[paramKey];
-      return paramVal;
+    result = str.replace(/\{(.+?)\}/g, (_, key) => {
+      return temp[key];
     });
   }
   return result;
 }
+
+export function trim(str, char, type) {
+  if (char) {
+    if (type == 'left') {
+      return str.replace(new RegExp('^\\'+char+'+', 'g'), '');
+    } else if (type == 'right') {
+      return str.replace(new RegExp('\\'+char+'+$', 'g'), '');
+    }
+    return str.replace(new RegExp('^\\'+char+'+|\\'+char+'+$', 'g'), '');
+  }
+  return str.replace(/^\s+|\s+$/g, '');
+};
+
+export function transFormData(obj) {
+  let formData = new FormData();
+  Object.keys(obj).forEach(key => {
+    formData.append(key, obj[key]);
+  });
+  return formData;
+}
+
+// 16进制 颜色转为 RGB 格式
+export function colorRGBA(sColor, opacity) {
+	sColor = sColor.toLowerCase();
+	if(sColor && reg.test(sColor)){
+		if(sColor.length === 4){
+			var sColorNew = "#";
+			for(var i=1; i<4; i+=1){
+				sColorNew += sColor.slice(i,i+1).concat(sColor.slice(i,i+1));	
+			}
+			sColor = sColorNew;
+		}
+		//处理六位的颜色值
+		var sColorChange = [];
+		for(var i=1; i<7; i+=2){
+			sColorChange.push(parseInt("0x"+sColor.slice(i,i+2)));	
+		}
+		return "RGBA(" + sColorChange.join(",") + ", "+ opacity + ")";
+	} else{
+		return sColor;	
+	}
+};

@@ -17,14 +17,18 @@
   background-color: $color-check-bg !important;
 }
 
-.el-table tr.el-table__row {
-  &:nth-child(odd) {
-    background: $color-white !important;
-  }
-  &:nth-child(even) {
-    background: $color-blue-bg !important;
-  }
+.el-table--enable-row-hover .el-table__body tr:hover > td {
+  background-color: $color-blue-bg !important;
 }
+
+// .el-table tr.el-table__row {
+//   &:nth-child(odd) {
+//     background: $color-white !important;
+//   }
+//   &:nth-child(even) {
+//     background: $color-blue-bg !important;
+//   }
+// }
 
 .el-table .cell {
   line-height: 20px !important;

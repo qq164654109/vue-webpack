@@ -2,6 +2,8 @@
 .fl { float: left !important; }
 .fr { float: right !important; }
 .clearfix { &::after { display: block; content: ""; clear: both; }}
+.marginfix { &::before { content: ''; display: table; } }
+
 
 // content
 .content-center { display: flex; align-items: center; justify-content: center; };
@@ -127,7 +129,7 @@
 .border-left-0   { border-left: 0 !important; }
 
 .more {
-  color:  #9B9B9B;
+  color: $color-notes;
   font-size:15px;
   text-decoration: underline;
   font-style: normal;
@@ -137,7 +139,8 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}.no-select {
+}
+.no-select {
   user-select: none;
 }
 .txt-left { 
@@ -159,8 +162,8 @@
 }
 
 .href {
-  color: #3886FF;
-  text-decoration: underline;
+  color: $color-main;
+  text-decoration: none;
   font-style: normal;
   cursor: pointer;
 }

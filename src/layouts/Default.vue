@@ -1,44 +1,29 @@
 <template>
-  <div id="layout" class="full">
-    <div class="top"></div>
-    <div class="left"></div>
-    <div class="cont">
-      <router-view></router-view>
-    </div>
+  <div id="layout-default">
+    <default-topbar></default-topbar>
+    <main class="main">
+      <transition name="fadetoleft" mode="out-in">
+        <router-view></router-view>
+      </transition>
+    </main>
   </div>
 </template>
 
+<script>
+  import DefaultTopbar from '@/components/layouts/DefaultTopbar';
+
+  export default {
+    components: {
+      DefaultTopbar
+    }
+  }
+</script>
+
 <style lang="scss" scoped>
-$bg: #818EA0;
-#layout {
-  position: relative;
-  height: 100vh;
-  .top {
-    position: absolute;
-    top: 15px;
-    left: 15px;
-    right: 15px;
-    height: 65px;
-    background-color: $bg;
-    border-radius: 4px;
-  }
-  .left {
-    position: absolute;
-    top: 95px;
-    left: 15px;
-    width: 150px;
-    bottom: 15px;
-    background-color: $bg;
-    border-radius: 4px;
-  }
-  .cont {
-    position: absolute;
-    top: 95px;
-    left: 180px;
-    bottom: 15px;
-    right: 15px;
-    background-color: $bg;
-    border-radius: 4px;
+#layout-default {
+  padding-top: $default-topbar-height;
+  .main {
+    overflow: hidden;
   }
 }
 </style>

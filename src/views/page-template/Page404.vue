@@ -5,13 +5,19 @@
       <h1>404</h1>
       <div class="desc">抱歉，你访问的页面不存在</div>
       <div class="actions">
-        <router-link :to="{path: $website.auth_path}">
+        <router-link to="/">
           <el-button type="primary">返回主页</el-button>
         </router-link>
       </div>
     </div>
   </div>
 </template>
+
+<script>
+  export default {
+    layout: 'blank'
+  }
+</script>
 
 <style lang="scss" scoped>
 .page-error {
@@ -28,7 +34,7 @@
     background-repeat: no-repeat;
     background-position: 50% 50%;
     background-size: contain;
-    background-image: url($oss + '/images/98e19050-88a1-43e2-ab35-eb79e6b6ef06.svg');
+    background-image: url($_OSS + '/images/98e19050-88a1-43e2-ab35-eb79e6b6ef06.svg');
   }
   .content {
     h1 {

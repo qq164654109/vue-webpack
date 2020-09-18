@@ -1,53 +1,45 @@
 export const sessionStore = {
-  set(key, val) {
-    let valStr = JSON.stringify(val);
-    if (sessionStorage != null) {
-      sessionStorage.setItem(key, valStr);
-    }
+  set(key, val, maxAge) {
+    val = JSON.stringify({
+      data: val,
+      expire: maxAge ? new Date().getTime() + maxAge : null
+    });
+    sessionStorage.setItem(key, val);
   },
   get(key) {
-    if (sessionStorage != null) {
-      let valStr = sessionStorage.getItem(key);
-      return JSON.parse(valStr);
-    } else {
+    let val = JSON.parse(sessionStorage.getItem(key));
+    if (val === null || val.expire !== null && new Date().getTime() > val.expire) {
       return null;
     }
+    return val.data;
   },
   remove(key) {
-    if (sessionStorage != null) {
-      sessionStorage.removeItem(key);
-    }
+    sessionStorage.removeItem(key);
   },
   clear() {
-    if (sessionStorage != null) {
-      sessionStorage.clear();
-    }
+    sessionStorage.clear();
   }
 }
 
 export const localStore = {
-  set(key, val) {
-    let valStr = JSON.stringify(val);
-    if (localStorage != null) {
-      localStorage.setItem(key, valStr);
-    }
+  set(key, val, maxAge) {
+    val = JSON.stringify({
+      data: val,
+      expire: maxAge ? new Date().getTime() + maxAge : null
+    });
+    localStorage.setItem(key, val);
   },
   get(key) {
-    if (localStorage != null) {
-      let valStr = localStorage.getItem(key);
-      return JSON.parse(valStr);
-    } else {
+    let val = JSON.parse(localStorage.getItem(key));
+    if (val === null || val.expire !== null && new Date().getTime() > val.expire) {
       return null;
     }
+    return val.data;
   },
   remove(key) {
-    if (localStorage != null) {
-      localStorage.removeItem(key);
-    }
+    localStorage.removeItem(key);
   },
   clear() {
-    if (localStorage != null) {
-      localStorage.clear();
-    }
+    localStorage.clear();
   }
 };

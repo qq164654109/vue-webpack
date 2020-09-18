@@ -6,6 +6,6 @@ export const login = createRequest('/server/auth/login', {
   headers: {'Content-Type':'application/x-www-form-urlencoded'}
 });
 
-export const getUserMenu = createRequest('/server/auth/menu', {
+export const requestUserMenu = createRequest('/server/auth/menu', {
   baseURL: process.env.BASE_URL
 });

@@ -36,7 +36,7 @@
 <style lang="scss" scoped>
 .test-list-optimize {
   display: flex;
-  padding: 20px 0;
+  padding: 10px 0;
   .btn {
     flex: 0 0 120px;
     width: 120px;

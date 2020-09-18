@@ -5,8 +5,9 @@
     border-color: $color-main !important;
   }
   &:focus {
-    border-color: $color-main !important;
-    box-shadow: 0 0 2px $color-main !important;
+    border-color: $color-white !important;
+    box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px rgba(65, 89, 247, .7);
+    transition: all .2s;
   }
 }
 
@@ -34,4 +35,8 @@
 }
 .el-input__suffix-inner {
   background-color: #fff;
+}
+
+.el-input__validateIcon.el-icon-circle-close:before {
+  content: "\e6c9";
 }

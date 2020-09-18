@@ -1,17 +1,17 @@
 import store from '@/store';
 import website from '@/config/website';
-import { sessionStore } from '@/utils/store';
+import { localStore } from '@/utils/store';
 
 export function getToken() {
-  return sessionStore.get(website.token_key);
+  return localStore.get(website.token_key);
 }
 
 export function setToken(val) {
-  sessionStore.set(website.token_key, val);
+  localStore.set(website.token_key, val);
 }
 
 export function removeToken() {
-  sessionStore.remove(website.token_key);
+  localStore.remove(website.token_key);
 }
 
 export function setAuth(roles) {

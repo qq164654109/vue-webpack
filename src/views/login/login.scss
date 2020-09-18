@@ -1,0 +1,112 @@
+$login-content-width: 390px;
+#login {
+  height: 100vh;
+  background-image: url('../../assets/img/login-bg.png');
+  background-size: 95%;
+  background-repeat: no-repeat;
+  background-position: 50% 0;
+  overflow: hidden;
+  .content {
+    position: relative;
+    width: $login-content-width;
+    height: 440px;
+    margin: 20vh auto 0;
+    padding-left: $login-content-width;
+    border-radius: 4px;
+    box-shadow: 0px 22px 41px 0px rgba(30,69,106,0.19);
+    user-select: none;
+    overflow: hidden;
+    background-color: $color-white;
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 50%;
+      height: 100%;
+      background: url($_OSS + '/images/login-pic.png') no-repeat center $color-main;
+    }
+    .form-wrap {
+      position: relative;
+      padding: 40px 40px 0;
+      .form-title {
+        position: relative;
+        height: 50px;
+        line-height: 40px;
+        font-weight: bold;
+        color: $color-title-sub;
+        letter-spacing: 1px;
+      }
+      .el-form {
+        margin-top: 20px;
+      }
+      .login-group {
+        position: relative;
+        
+      }
+      .code-input {
+        width: 160px;
+        margin-right: 10px;
+        vertical-align: top;
+      }
+      .code {
+        display: inline-block;
+        width: 140px;
+        height: 40px;
+        background-color: $color-border-line;
+        border-radius: 4px;
+        overflow: hidden;
+      }
+      .svg-icon {
+        height: 20px;
+        margin-top: 8px;
+        width: 28px;
+        padding: 2px 5px 2px 0;
+        border-right: 1px solid #ccc;
+      }
+      ::v-deep.el-input--prefix .el-input__inner {
+        padding-left: 52px;
+      }
+      ::v-deep.el-form-item__content {
+        line-height: 1;
+      }
+      .login-btn {
+        height: 48px;
+        color: $color-white;
+        font-weight: bold;
+        letter-spacing: 10px;
+        border-radius: 4px;
+        border: none;
+        &.is-disabled {
+          opacity: 0.7;
+          &:after {
+              display: inline-block;
+              content: '\e6cf';
+              width: 18px;
+              font-family: element-icons !important;
+              animation: rotating 2s linear infinite;
+           }
+         }
+        }
+    }
+  }
+}
+
+@keyframes rotating {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media screen and (max-width: 900px) {
+  #login .content {
+    width: $login-content-width;
+    padding-left: 0;
+    &::before {
+      display: none;
+    }
+  }
+}

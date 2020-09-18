@@ -22,3 +22,6 @@ npm run test:unit
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### 重置实例 data
+Object.assign(this.$data, this.$options.data())

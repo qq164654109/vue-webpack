@@ -22,11 +22,11 @@ export default class AuthVueRouter extends VueRouter {
       this.resetRouter();
     }
     this.authRoutes = this._generateRoutes(aMenu);
-    let redirectRoutePath = this.authRoutes[0] ? this.authRoutes[0].path : '/router-empty';
     this.addRoutes([
       {
         path: '/',
-        redirect: redirectRoutePath
+        name: 'Home',
+        component: asyncRoutes.Home
       },
       ...this.authRoutes,
       {
@@ -40,6 +40,9 @@ export default class AuthVueRouter extends VueRouter {
     const newRouter = new VueRouter(this._initialOpts);
     this.matcher = newRouter.matcher;
     this.authRoutes = null;
+  }
+  setQuery(query) {
+    this.push({ query });
   }
   _generateRoutes(aMenu, parentPath = '') {
     return aMenu.map(oMenu => {
